@@ -32,7 +32,9 @@ class _HomeState extends State<Home> {
           SizedBox(width: 10.w,)],
         ),
 
-        body:ListView.separated(
+        body:
+        signupDetailsProvider.usersDetailsList.isNotEmpty?
+        ListView.separated(
             padding: EdgeInsets.only(top: 20.h,bottom: 20.h,left: 20.w,right: 20.w),
             itemBuilder: (context, index) {
               final details = signupDetailsProvider.usersDetailsList[index];
@@ -67,7 +69,12 @@ class _HomeState extends State<Home> {
           );
         }, separatorBuilder: (context, index) {
           return SizedBox(height: 10.h,);
-        }, itemCount: signupDetailsProvider.usersDetailsList.length),
+        }, itemCount: signupDetailsProvider.usersDetailsList.length):TextButton(
+            onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (_)=>AddUser()));
+        }, child: Center(child: Text("Add New User",style: TextStyle(
+          color: Colors.blue
+        ),))),
       ),
     );
   }
